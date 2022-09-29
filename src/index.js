@@ -15,6 +15,22 @@ const sagaMiddleware = createSagaMiddleware();
 
 // SAGA Functions
 
+
+//GET FAVORITES SAGA FUNCTION
+function* fetchFavs() {
+    try {
+        const favoritesList = yield axios({
+            method: 'GET',
+            url: '/api/favorite'
+        })
+        yield put({
+            type: 'SET_FAVORITES',
+            payload: favoritesList.data
+        })
+        console.log('Favorites from DB is:', favoritesList.data);
+
+    } catch (error) {
+
 function* fetchCategories() {
     try {
         // Fetch categories
@@ -52,7 +68,7 @@ function* updateCategoryOfFavorite(action) {
 
 // rootSaga
 function* rootSaga() {
-    yield takeEvery('SAGA_FETCH_FAVS');
+    yield takeEvery('SAGA_FETCH_FAVS', fetchFavs);
     yield takeEvery('SAGA_FETCH_CATS', fetchCategories);
     yield takeEvery('SAGA_POST_FAV');
     yield takeEvery('SAGA_PUT_CAT', updateCategoryOfFavorite);
@@ -62,7 +78,7 @@ function* rootSaga() {
 // Reducers
 
 const favorites = (state = [], action) => {
-    switch(action.type) {
+    switch (action.type) {
         case 'SET_FAVORITES':
             return action.payload;
     }
@@ -70,7 +86,7 @@ const favorites = (state = [], action) => {
 }
 
 const categories = (state = [], action) => {
-    switch(action.type) {
+    switch (action.type) {
         case 'SET_CATEGORIES':
             return action.payload;
     }
@@ -80,12 +96,12 @@ const categories = (state = [], action) => {
 
 
 const store = createStore(
-    combineReducers({ 
-        favorites, 
-        categories 
+    combineReducers({
+        favorites,
+        categories
     }),
     applyMiddleware(sagaMiddleware, logger)
-  );
+);
 
 // Pass rootSaga
 sagaMiddleware.run(rootSaga);

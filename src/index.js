@@ -17,7 +17,8 @@ const sagaMiddleware = createSagaMiddleware();
 
 function* searchGif(action){
     // action.payload is a string
-    const search = action.payload.data;
+    const search = action.payload;
+    console.log('Search query:', action.payload)
 
     try{
         const searchRes = yield axios({
@@ -113,7 +114,7 @@ function* rootSaga() {
 const favorites = (state = [], action) => {
     switch (action.type) {
         case 'SET_FAVORITES':
-            return [action.payload];
+            return action.payload;
     }
     return state;
 }
@@ -138,7 +139,7 @@ const searchResults = (state=[], action)=> {
 const store = createStore(
     combineReducers({ 
         favorites, 
-        catagories,
+        categories,
         searchResults 
     }),
     applyMiddleware(sagaMiddleware, logger)

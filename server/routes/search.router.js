@@ -12,7 +12,7 @@ router.get('/:query', (req, res) => {
     let q = req.params.query;
     console.log(q);
 
-    axios.get(`https://api.giphy.com/v1/gifs/search?api_key=${api_key}&q=${q}&limit=5`)
+    axios.get(`https://api.giphy.com/v1/gifs/search?api_key=${api_key}&q=${q}&limit=30`)
     .then((gifRes => {
       // console.log(gifRes.data.data.images.original.url)
       res.send(gifRes.data.data)

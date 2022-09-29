@@ -15,7 +15,7 @@ function App(props) {
       <Router>
         {/* <Header /> */}
         <h1>Giphy Search!</h1>
-        <Redirect from="/" to="/search" />
+        {/* <Redirect from="/" to="/search" /> */}
         <Route exact path="/search">
           <Search />
         </Route>

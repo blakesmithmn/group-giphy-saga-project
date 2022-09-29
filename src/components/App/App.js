@@ -4,6 +4,9 @@ import { HashRouter as Router, Route, Link, Redirect } from 'react-router-dom';
 
 import { useSelector } from 'react-redux';
 
+
+
+import Search from '../Search/Search';
 import Favorites from '../Favorites/Favorites';
 
 function App(props) {
@@ -11,10 +14,10 @@ function App(props) {
     <div className="App">
       <Router>
         {/* <Header /> */}
-        {/* <h1>Giphy Search!</h1> */}
-        {/* <Redirect from="/" to="/search" /> */}
+        <h1>Giphy Search!</h1>
+        <Redirect from="/" to="/search" />
         <Route exact path="/search">
-          {/* <Search /> */}
+          <Search />
         </Route>
         <Route exact path="/favorites">
           <Favorites />

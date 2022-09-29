@@ -1,0 +1,15 @@
+.results {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.individualGif {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.image {
+    padding-bottom: 20px;
+}

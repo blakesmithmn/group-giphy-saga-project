@@ -23,15 +23,30 @@ router.get('/', (req, res) => {
 
 // add a new favorite
 router.post('/', (req, res) => {
-  res.sendStatus(200);
+  console.log('req.body:',req.body.url);
+  const gifUrl = req.body.url;
+  const sqlQuery =`
+    INSERT INTO favorites (url)
+      VALUES ($1);
+    `
+  const sqlValues = [gifUrl]
+
+  pool.query(sqlQuery, sqlValues)
+      .then(response => {
+        res.sendStatus(200);
+      })
+      .catch(error => {
+        res.sendStatus(500);
+        console.log('Error in POST /api/favorite', error);
+      })
 });
 
 // update given favorite with a category id
 router.put('/:favId', (req, res) => {
   // req.body should contain a category_id to add to this favorite image
   const updateId = req.params.favId;
-  const newCategoryId = req.body
-  const queryText = `UPDATE "favorites
+  const newCategoryId = req.body.newCategoryId;
+  const queryText = `UPDATE "favorites"
                         SET "category_id" = $1
                         WHERE "id" = $2;`
   pool.query(queryText, [newCategoryId, updateId])

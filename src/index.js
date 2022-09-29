@@ -15,6 +15,36 @@ const sagaMiddleware = createSagaMiddleware();
 
 // SAGA Functions
 
+function* searchGif(action){
+    // action.payload is a string
+    const search = action.payload;
+    console.log('Search query:', action.payload)
+
+    try{
+        const searchRes = yield axios({
+            method: 'GET',
+            url: `/search/${search}`
+        })
+        yield put({
+            type: 'SET_SEARCH_RESULTS',
+            payload: searchRes.data
+        })
+    }catch(error){
+        console.log(error);
+    }
+}
+
+function* addFav(gifUrl){
+    try{
+        yield axios({
+            method: 'POST',
+            url: '/api/favorite',
+            data: gifUrl.payload
+        })
+    }catch(error){
+        console.log(error);
+    }
+}
 
 //GET FAVORITES SAGA FUNCTION
 function* fetchFavs() {
@@ -31,9 +61,10 @@ function* fetchFavs() {
 
     } catch (error) {
         console.log(error);
-        alert('Error fetching categories');
+        alert('Error fetching favs');
     }
-}
+}     
+
 
 function* fetchCategories() {
     try {
@@ -56,11 +87,11 @@ function* updateCategoryOfFavorite(action) {
         const newCategoryId = action.payload.newCategoryId;
         const updateId = action.payload.favoriteId;
         // Send new category ID to put into favorites table
-        yield axios.put(`/api/favorite/${updateId}`, newCategoryId);
+        yield axios.put(`/api/favorite/${updateId}`, {newCategoryId});
         // Re-render DOM (actually don't need to??)
-        // yield put ({
-        //     type: 'SAGA_FETCH_FAVS'
-        // })
+        yield put ({
+            type: 'SAGA_FETCH_FAVS'
+        })
 
     } catch (error) {
         console.log(error);
@@ -74,9 +105,9 @@ function* updateCategoryOfFavorite(action) {
 function* rootSaga() {
     yield takeEvery('SAGA_FETCH_FAVS', fetchFavs);
     yield takeEvery('SAGA_FETCH_CATS', fetchCategories);
-    // yield takeEvery('SAGA_POST_FAV');
+    yield takeEvery('SAGA_POST_FAV', addFav);
     yield takeEvery('SAGA_PUT_CAT', updateCategoryOfFavorite);
-    // yield takeEvery('SAGA_SEARCH');
+    yield takeEvery('SAGA_SEARCH', searchGif);
 }
 
 // Reducers
@@ -97,12 +128,20 @@ const categories = (state = [], action) => {
     return state;
 }
 
+const searchResults = (state=[], action)=> {
+    switch(action.type) {
+        case 'SET_SEARCH_RESULTS':
+            return action.payload;
+    }
+    return state;
+}
 
 
 const store = createStore(
-    combineReducers({
-        favorites,
-        categories
+    combineReducers({ 
+        favorites, 
+        categories,
+        searchResults 
     }),
     applyMiddleware(sagaMiddleware, logger)
 );

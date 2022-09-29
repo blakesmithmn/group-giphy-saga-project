@@ -1,9 +1,23 @@
 import React from 'react';
 
+import { HashRouter as Router, Route, Link, Redirect} from 'react-router-dom';
+
+import { useSelector } from 'react-redux';
+
 function App(props) {
   return (
-    <div>
-      <h1>Giphy Search!</h1>
+    <div className="App">
+      <Router>
+        {/* <Header /> */}
+      {/* <h1>Giphy Search!</h1> */}
+      <Redirect from="/" to="/search" />
+      <Route exact path="/search">
+        {/* <Search /> */}
+      </Route>
+      <Route exact path="/favorites">
+        {/* <Favorites /> */}
+      </Route>
+      </Router>
     </div>
   );
 }

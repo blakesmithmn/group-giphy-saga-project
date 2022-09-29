@@ -37,9 +37,9 @@ const favorites = (state = [], action) => {
     return state;
 }
 
-const catagories = (state = [], action) => {
+const categories = (state = [], action) => {
     switch(action.type) {
-        case 'SET_CATAGORIES':
+        case 'SET_CATEGORIES':
             return action.payload;
     }
     return state;
@@ -50,7 +50,7 @@ const catagories = (state = [], action) => {
 const store = createStore(
     combineReducers({ 
         favorites, 
-        catagories 
+        categories 
     }),
     applyMiddleware(sagaMiddleware, logger)
   );

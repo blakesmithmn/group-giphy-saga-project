@@ -56,11 +56,11 @@ function* updateCategoryOfFavorite(action) {
         const newCategoryId = action.payload.newCategoryId;
         const updateId = action.payload.favoriteId;
         // Send new category ID to put into favorites table
-        yield axios.put(`/api/favorite/${updateId}`, newCategoryId);
+        yield axios.put(`/api/favorite/${updateId}`, {newCategoryId});
         // Re-render DOM (actually don't need to??)
-        // yield put ({
-        //     type: 'SAGA_FETCH_FAVS'
-        // })
+        yield put ({
+            type: 'SAGA_FETCH_FAVS'
+        })
 
     } catch(error) {
         console.log(error);

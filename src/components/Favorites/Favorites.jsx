@@ -18,7 +18,7 @@ export default function Favorites() {
         <>
             <Grid container spacing={2}>
                 {favoritesArray.map(fave => (
-                    <Grid item xs={8}>
+                    <Grid key={fave.id} item xs={8}>
                         <FavoritesItem key={fave.id} fave={fave} />
                     </Grid>
                 ))}

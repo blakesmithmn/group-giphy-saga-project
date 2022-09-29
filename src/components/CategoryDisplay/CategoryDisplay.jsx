@@ -5,14 +5,14 @@ import { InputLabel, FormControl, Select } from "@mui/material";
 
 // This component will live inside of FavoritesItem
 // The currently mapped gif object will pass in it's category Id
-export default function CategoryDisplay({categoryName}) {
+export default function CategoryDisplay({categoryName, favoriteId}) {
 
     const categoriesArray = useSelector(store => store.categories);
     const dispatch = useDispatch();
 
     const handleCategoryChange = (event) => {
         // Trigger Saga PUT request to update favorites table
-        dispatch({type: 'SAGA_PUT_CAT', payload: event.target.value});
+        dispatch({type: 'SAGA_PUT_CAT', payload: { newCategoryId: event.target.value, favoriteId: favoriteId }});
     }
 
     return (

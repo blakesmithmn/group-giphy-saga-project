@@ -15,13 +15,28 @@ const sagaMiddleware = createSagaMiddleware();
 
 // SAGA Functions
 
+function* fetchCategories() {
+    try {
+        // Fetch categories
+        const categories = yield axios.get('/api/category');
+        // Fill category reducer
+        yield console.log(categories);
+        yield put ({
+            type: 'SET_CATEGORIES',
+            payload: categories.data
+        });
+    } catch(error) {
+        console.log(error);
+        alert('Error fetching categories');
+    }
+}
 
 
 
 // rootSaga
 function* rootSaga() {
     yield takeEvery('SAGA_FETCH_FAVS');
-    yield takeEvery('SAGA_FETCH_CATS');
+    yield takeEvery('SAGA_FETCH_CATS', fetchCategories);
     yield takeEvery('SAGA_POST_FAV');
     yield takeEvery('SAGA_PUT_CAT');
     yield takeEvery('SAGA_SEARCH');

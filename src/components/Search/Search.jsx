@@ -23,7 +23,8 @@ export default function Search(){
     // Import array of search results from redux reducer:
     const searchResults = useSelector(store=> store.searchResults)
 
-    console.log(searchResults) // [{}{}]
+    // console.log(searchResults) 
+    // [{}{}]
 
     return(
         <>
@@ -40,9 +41,9 @@ export default function Search(){
                     label="Outlined" 
                     variant="outlined"
                     value={search}
-                    onChange={e=> setSearch(e.target.value)}
+                    onChange={(e) => setSearch(e.target.value)}
                     />
-                <Button variant="contained" onClick={submitSearch}>Contained</Button>
+                <Button variant="contained" onClick={submitSearch}>Search</Button>
             </Box>
             <ul className="results">
                 {/* <p> search results here:</p> */}

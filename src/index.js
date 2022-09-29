@@ -30,6 +30,10 @@ function* fetchFavs() {
         console.log('Favorites from DB is:', favoritesList.data);
 
     } catch (error) {
+        console.log(error);
+        alert('Error fetching favs');
+    }
+}     
 
 function* fetchCategories() {
     try {
@@ -70,9 +74,9 @@ function* updateCategoryOfFavorite(action) {
 function* rootSaga() {
     yield takeEvery('SAGA_FETCH_FAVS', fetchFavs);
     yield takeEvery('SAGA_FETCH_CATS', fetchCategories);
-    yield takeEvery('SAGA_POST_FAV');
+    // yield takeEvery('SAGA_POST_FAV');
     yield takeEvery('SAGA_PUT_CAT', updateCategoryOfFavorite);
-    yield takeEvery('SAGA_SEARCH');
+    // yield takeEvery('SAGA_SEARCH');
   }
 
 // Reducers

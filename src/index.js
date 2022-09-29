@@ -15,6 +15,23 @@ const sagaMiddleware = createSagaMiddleware();
 
 // SAGA Functions
 
+function* searchGif(action){
+    // action.payload is a string
+    const search = action.payload.data;
+
+    try{
+        const searchRes = yield axios({
+            method: 'GET',
+            url: `/search/${search}`
+        })
+        yield put({
+            type: 'SET_SEARCH_RESULTS',
+            payload: searchRes.data
+        })
+    }catch(error){
+        console.log(error);
+    }
+}
 
 
 
@@ -24,7 +41,7 @@ function* rootSaga() {
     // yield takeEvery('SAGA_FETCH_CATS');
     // yield takeEvery('SAGA_POST_FAV');
     // yield takeEvery('SAGA_PUT_CAT');
-    // yield takeEvery('SAGA_SEARCH');
+    yield takeEvery('SAGA_SEARCH', searchGif);
   }
 
 // Reducers
@@ -32,7 +49,7 @@ function* rootSaga() {
 const favorites = (state = [], action) => {
     switch(action.type) {
         case 'SET_FAVORITES':
-            return action.payload;
+            return [action.payload];
     }
     return state;
 }
@@ -45,12 +62,20 @@ const catagories = (state = [], action) => {
     return state;
 }
 
+const searchResults = (state=[], action)=> {
+    switch(action.type) {
+        case 'SET_SEARCH_RESULTS':
+            return action.payload;
+    }
+    return state;
+}
 
 
 const store = createStore(
     combineReducers({ 
         favorites, 
-        catagories 
+        catagories,
+        searchResults 
     }),
     applyMiddleware(sagaMiddleware, logger)
   );

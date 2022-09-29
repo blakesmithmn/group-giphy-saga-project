@@ -20,11 +20,11 @@ const sagaMiddleware = createSagaMiddleware();
 
 // rootSaga
 function* rootSaga() {
-    yield takeEvery('SAGA_FETCH_FAVS');
-    yield takeEvery('SAGA_FETCH_CATS');
-    yield takeEvery('SAGA_POST_FAV');
-    yield takeEvery('SAGA_PUT_CAT');
-    yield takeEvery('SAGA_SEARCH');
+    // yield takeEvery('SAGA_FETCH_FAVS');
+    // yield takeEvery('SAGA_FETCH_CATS');
+    // yield takeEvery('SAGA_POST_FAV');
+    // yield takeEvery('SAGA_PUT_CAT');
+    // yield takeEvery('SAGA_SEARCH');
   }
 
 // Reducers

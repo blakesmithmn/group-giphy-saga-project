@@ -33,13 +33,25 @@ function* searchGif(action){
     }
 }
 
+function* addFav(gifUrl){
+    try{
+        yield axios({
+            method: 'POST',
+            url: '/api/favorite',
+            data: gifUrl.payload
+        })
+    }catch(error){
+        console.log(error);
+    }
+}
+
 
 
 // rootSaga
 function* rootSaga() {
     // yield takeEvery('SAGA_FETCH_FAVS');
     // yield takeEvery('SAGA_FETCH_CATS');
-    // yield takeEvery('SAGA_POST_FAV');
+    yield takeEvery('SAGA_POST_FAV', addFav);
     // yield takeEvery('SAGA_PUT_CAT');
     yield takeEvery('SAGA_SEARCH', searchGif);
   }

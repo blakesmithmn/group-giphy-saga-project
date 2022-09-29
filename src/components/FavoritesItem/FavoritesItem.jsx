@@ -8,6 +8,8 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
+import CategoryDisplay from "../CategoryDisplay/CategoryDisplay";
+
 export default function FavoritesItem({ fave }) {
 
 
@@ -15,8 +17,7 @@ export default function FavoritesItem({ fave }) {
         <Card>
             <CardContent>
                 <img src={fave.url} />
-                {/* // CAT COMPONENT */}
-                <Button variant='outlined'>Change</Button>
+                <CategoryDisplay categoryName={fave.name} favoriteId={fave.id}/>
             </CardContent>
         </Card>
     )

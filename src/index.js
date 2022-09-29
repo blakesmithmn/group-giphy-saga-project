@@ -65,17 +65,18 @@ function* fetchFavs() {
     }
 }     
 
+
 function* fetchCategories() {
     try {
         // Fetch categories
         const categories = yield axios.get('/api/category');
         // Fill category reducer
         yield console.log(categories);
-        yield put ({
+        yield put({
             type: 'SET_CATEGORIES',
             payload: categories.data
         });
-    } catch(error) {
+    } catch (error) {
         console.log(error);
         alert('Error fetching categories');
     }
@@ -92,7 +93,7 @@ function* updateCategoryOfFavorite(action) {
             type: 'SAGA_FETCH_FAVS'
         })
 
-    } catch(error) {
+    } catch (error) {
         console.log(error);
         alert('Error updating gif category');
     }

@@ -1,5 +1,5 @@
 import './Header.css';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useHistory } from 'react-router-dom';
 import { useEffect, useState } from "react";
 
 //MUI IMPORTS
@@ -14,6 +14,8 @@ import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
+import ButtonGroup from '@mui/material/ButtonGroup';
+
 
 
 
@@ -22,7 +24,18 @@ import Menu from '@mui/material/Menu';
 
 
 export default function Header() {
+    const history = useHistory();
 
+    const navToSearch = () => {
+        history.push('/search');
+    }
+
+    const navToFavs = () => {
+        history.push('/favorites');
+    }
+    const navToCats = () => {
+        history.push('/categories');
+    }
 
 
     return (
@@ -31,9 +44,21 @@ export default function Header() {
             <AppBar position='static' color='secondary' className='headerComponent'>
                 <Container maxWidth="xl">
                     <Toolbar>
-                        <Typography variant="h4">
-                            Greatest Gifs
-                        </Typography>
+                        <Grid container>
+                            <Grid item xs={6} textAlign='left'>
+                                <Typography variant="h4" >
+                                    Greatest Gifs
+                                </Typography>
+                            </Grid>
+                            <Grid item xs={6} textAlign='right'>
+                                <ButtonGroup variant='outlined' aria-label='outlined button group' className='navButtons' color='secondary'>
+                                    <Button onClick={navToSearch}>Search</Button>
+                                    <Button onClick={navToFavs}>Favorites</Button>
+                                    <Button onClick={navToCats}>Categories</Button>
+                                </ButtonGroup>
+
+                            </Grid>
+                        </Grid>
                     </Toolbar>
                 </Container>
             </AppBar>

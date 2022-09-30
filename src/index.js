@@ -102,7 +102,10 @@ function* updateCategoryOfFavorite(action) {
 function* addCategory(action) {
         try {
             const newCategoryName = action.payload;
-            axios.post('/api/category', {newCategoryName: newCategoryName})
+            yield axios.post('/api/category', {newCategoryName: newCategoryName})
+            yield put ({
+                type: 'SAGA_FETCH_CATS'
+            })
         } catch (error) {
             console.log(error);
             alert('Error adding new category')

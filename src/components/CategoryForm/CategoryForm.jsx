@@ -23,6 +23,10 @@ export default function CategoryForm() {
         setCategoryInput('');
     }
 
+    const deleteCategory = (id) => {
+        dispatch({type: 'SAGA_DELETE_CATEGORY', payload: id});
+    }
+
     return (
         <section className="categoryForm">
             <Box sx={{'& > :not(style)': { m: 1, width: '25ch' },}}>
@@ -38,7 +42,8 @@ export default function CategoryForm() {
             <ul className="categoryFormList">
                 {categoriesArray.map(category => {
                     return (
-                        <li key={category.id}>{category.name}</li>
+                        <li key={category.id}>{category.name} 
+                        <button className="deleteCategoryButton" onClick={() => deleteCategory(category.id)}>x</button></li>
                     );
                 })}
             </ul>

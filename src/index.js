@@ -112,6 +112,22 @@ function* addCategory(action) {
         }
 }
 
+function* deleteCategory(action) {
+    try {
+        const categoryDeleteId = action.payload;
+        yield console.log(categoryDeleteId)
+        // Change all category_id values to NULL in  that posses 
+        yield axios.put(`/api/category/${categoryDeleteId}`)
+        yield axios.delete(`/api/category/${categoryDeleteId}`);
+        yield put ({
+            type: 'SAGA_FETCH_CATS'
+        }) 
+    } catch (error) {
+        console.log(error);
+        alert('Error deleting category');
+    }
+}
+
 
 
 // rootSaga
@@ -122,6 +138,7 @@ function* rootSaga() {
     yield takeEvery('SAGA_PUT_CAT', updateCategoryOfFavorite);
     yield takeEvery('SAGA_SEARCH', searchGif);
     yield takeEvery('SAGA_ADD_CATEGORY', addCategory);
+    yield takeEvery('SAGA_DELETE_CATEGORY', deleteCategory);
 }
 
 // Reducers

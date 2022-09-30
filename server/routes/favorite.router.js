@@ -8,7 +8,8 @@ router.get('/', (req, res) => {
   const sqlQuery = `
      SELECT favorites.*, category.name FROM "favorites"
     LEFT JOIN "category"
-      ON favorites.category_id = category.id;
+      ON favorites.category_id = category.id
+    ORDER BY "id";
     `
 
   pool.query(sqlQuery)

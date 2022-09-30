@@ -1,3 +1,9 @@
 .categoryFormList {
     list-style: none;
 }
+
+.deleteCategoryButton {
+    margin-left: 10px;
+    border-radius: 100px;
+    border-style: dotted;
+}

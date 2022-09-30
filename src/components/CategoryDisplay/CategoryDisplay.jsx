@@ -30,11 +30,11 @@ export default function CategoryDisplay({categoryName, favoriteId}) {
           label={categoryName}
           onChange={handleCategoryChange}
         >
-          <MenuItem value={categoriesArray[0].id}>{categoriesArray[0].name}</MenuItem>
-          <MenuItem value={categoriesArray[1].id}>{categoriesArray[1].name}</MenuItem>
-          <MenuItem value={categoriesArray[2].id}>{categoriesArray[2].name}</MenuItem>
-          <MenuItem value={categoriesArray[3].id}>{categoriesArray[3].name}</MenuItem>
-          <MenuItem value={categoriesArray[4].id}>{categoriesArray[4].name}</MenuItem>
+          <MenuItem value={categoriesArray[0]?.id}>{categoriesArray[0]?.name}</MenuItem>
+          <MenuItem value={categoriesArray[1]?.id}>{categoriesArray[1]?.name}</MenuItem>
+          <MenuItem value={categoriesArray[2]?.id}>{categoriesArray[2]?.name}</MenuItem>
+          <MenuItem value={categoriesArray[3]?.id}>{categoriesArray[3]?.name}</MenuItem>
+          <MenuItem value={categoriesArray[4]?.id}>{categoriesArray[4]?.name}</MenuItem>
         </Select>
         <FormHelperText>Click to change category</FormHelperText>
       </FormControl>

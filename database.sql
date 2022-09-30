@@ -13,6 +13,7 @@ CREATE TABLE "category" (
 CREATE TABLE "favorites" (
     "id" SERIAL PRIMARY KEY,
     "url" VARCHAR NOT NULL,
+    "category_id" integer REFERENCES "category" DEFAULT NULL 
 );
 
 

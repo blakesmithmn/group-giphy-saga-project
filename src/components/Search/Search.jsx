@@ -2,11 +2,14 @@
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
+import FormGroup from '@mui/material/FormGroup';
 
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import SearchItem from '../SearchItem/SearchItem';
+
+import './search.css';
 
 export default function Search(){
     const [search, setSearch] = useState('');
@@ -17,36 +20,30 @@ export default function Search(){
     const submitSearch = ()=> {
         dispatch({
             type: 'SAGA_SEARCH',
-            payload: search
+            payload: search.query
         })
+        setSearch('');
     }
     // Import array of search results from redux reducer:
     const searchResults = useSelector(store=> store.searchResults)
-
-    // console.log(searchResults) 
+    console.log(search);
+    console.log(searchResults) 
     // [{}{}]
 
     return(
         <>
-            <Box
-                component="form"
-                sx={{
-                    '& > :not(style)': { m: 1, width: '25ch' },
-                }}
-                noValidate
-                autoComplete="off"
-                >
+            <form onSubmit={submitSearch}>
                 <TextField 
-                    id="outlined-basic" 
-                    label="Outlined" 
+                    id="outlined-basic"
+                    size="small" 
+                    label="Search" 
                     variant="outlined"
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
                     />
-                <Button variant="contained" onClick={submitSearch}>Search</Button>
-            </Box>
+                <Button id="button" type="submit" variant="contained">Search</Button>
+            </form>
             <ul className="results">
-                {/* <p> search results here:</p> */}
                 {searchResults.map(gif => (
                     <SearchItem key={gif.id} gif={gif} />
                 ))}

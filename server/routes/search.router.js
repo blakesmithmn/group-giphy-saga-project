@@ -3,7 +3,7 @@ const router = express.Router();
 const axios = require('axios');
 
 const api_key = process.env.API_KEY;
-console.log(api_key);
+// console.log(api_key);
 
 // Get GIFS based on search Q
 router.get('/:query', (req, res) => {

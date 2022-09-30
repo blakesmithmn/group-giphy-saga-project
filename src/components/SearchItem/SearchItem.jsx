@@ -4,14 +4,17 @@ import Paper from '@mui/material/Paper';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import Fab from '@mui/material/Fab';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import './searchItem.css';
+import { useState } from 'react';
 
 export default function SearchItem({ gif }){
     const dispatch = useDispatch();
-
+    const favorites = useSelector(store=> store.favorites);
     // Change image sizing tag here!
     const gifUrl = gif.images.fixed_height_small.url;
+
+    const [favorite, setFavorite] = useState(false);
 
     // just sending the URL(string) we chose to display to add to the DB.
     const addToFavs = ()=>{
@@ -19,6 +22,7 @@ export default function SearchItem({ gif }){
             type: 'SAGA_POST_FAV',
             payload: {url: gifUrl}
         })
+        setFavorite(true);
     }
 
     return(
@@ -35,11 +39,18 @@ export default function SearchItem({ gif }){
             >
             <Paper className="individualGif" elevation={3}>
                 <img className="image" src={gifUrl}/>
-                <Fab size="small" color="secondary">
+                {!favorite ? 
+                <Fab size="small" color="secondary" >
+                    <FavoriteIcon 
+                        onClick={addToFavs}
+                    />
+                </Fab> :
+                <Fab size="small" disabled aria-label="like" >
                     <FavoriteIcon 
                         onClick={addToFavs}
                     />
                 </Fab>
+                }
             </Paper>
         </Box>
     )

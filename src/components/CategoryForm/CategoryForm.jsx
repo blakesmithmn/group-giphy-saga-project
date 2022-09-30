@@ -5,6 +5,7 @@ import './CategoryForm.css'
 // MUI imports
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
+import Box from '@mui/material/Box';
 
 export default function CategoryForm() {
 
@@ -24,14 +25,16 @@ export default function CategoryForm() {
 
     return (
         <section className="categoryForm">
-            <TextField 
-                    id="outlined-basic" 
-                    placeholder="Add a Category"
-                    variant="outlined"
-                    value={categoryInput}
-                    onChange={(e) => setCategoryInput(e.target.value)}
-                    />
-            <Button variant="contained" onClick={submitNewCategory}>Add</Button>
+            <Box sx={{'& > :not(style)': { m: 1, width: '25ch' },}}>
+                <TextField 
+                        id="outlined-basic" 
+                        placeholder="Add a Category"
+                        variant="outlined"
+                        value={categoryInput}
+                        onChange={(e) => setCategoryInput(e.target.value)}
+                        />
+                <Button variant="contained" onClick={submitNewCategory}>Add</Button>
+            </Box>
             <ul className="categoryFormList">
                 {categoriesArray.map(category => {
                     return (

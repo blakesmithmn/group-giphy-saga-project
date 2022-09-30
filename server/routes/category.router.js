@@ -17,4 +17,9 @@ router.get('/', (req, res) => {
     });
 });
 
+router.post('/', (req, res) => {
+  const newCategoryName = req.body.newCategoryName;
+  console.log(newCategoryName);
+})
+
 module.exports = router;

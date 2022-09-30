@@ -99,6 +99,16 @@ function* updateCategoryOfFavorite(action) {
     }
 }
 
+function* addCategory(action) {
+        try {
+            const newCategoryName = action.payload;
+            axios.post('/api/category', {newCategoryName: newCategoryName})
+        } catch (error) {
+            console.log(error);
+            alert('Error adding new category')
+        }
+}
+
 
 
 // rootSaga
@@ -108,6 +118,7 @@ function* rootSaga() {
     yield takeEvery('SAGA_POST_FAV', addFav);
     yield takeEvery('SAGA_PUT_CAT', updateCategoryOfFavorite);
     yield takeEvery('SAGA_SEARCH', searchGif);
+    yield takeEvery('SAGA_ADD_CATEGORY', addCategory);
 }
 
 // Reducers

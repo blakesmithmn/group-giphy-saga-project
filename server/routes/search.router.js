@@ -11,6 +11,7 @@ router.get('/:query', (req, res) => {
     // Get the q parameter
     let q = req.params.query;
     console.log(q);
+    console.log(`https://api.giphy.com/v1/gifs/search?api_key=${api_key}&q=${q}&limit=30`)
 
     axios.get(`https://api.giphy.com/v1/gifs/search?api_key=${api_key}&q=${q}&limit=30`)
     .then((gifRes => {

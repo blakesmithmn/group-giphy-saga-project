@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import FavoritesItem from "../FavoritesItem/FavoritesItem";
+import './Favorites.css';
 
 // MUI IMPORTS
 import Grid from '@mui/material/Grid';
@@ -16,9 +17,9 @@ export default function Favorites() {
 
     return (
         <>
-            <Grid container spacing={2}>
+            <Grid container spacing={2} className='favoritesdisplay'>
                 {favoritesArray.map(fave => (
-                    <Grid key={fave.id} item xs={8}>
+                    <Grid key={fave.id} item xs={3}>
                         <FavoritesItem fave={fave} />
                     </Grid>
                 ))}

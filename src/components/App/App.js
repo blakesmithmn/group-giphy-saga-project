@@ -10,6 +10,7 @@ import { useSelector } from 'react-redux';
 import Search from '../Search/Search';
 import Favorites from '../Favorites/Favorites';
 import Header from '../Header/Header';
+import CategoryForm from '../CategoryForm/CategoryForm';
 
 function App(props) {
   return (
@@ -23,6 +24,9 @@ function App(props) {
         </Route>
         <Route exact path="/favorites">
           <Favorites />
+        </Route>
+        <Route exact path="/categories">
+          <CategoryForm />
         </Route>
       </Router>
     </div>

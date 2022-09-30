@@ -17,4 +17,20 @@ router.get('/', (req, res) => {
     });
 });
 
+router.post('/', (req, res) => {
+  const newCategoryName = req.body.newCategoryName;
+  const queryText = `INSERT INTO "category"
+                      ("name")
+                      VALUES
+                      ($1)`
+  pool.query(queryText, [newCategoryName])
+  .then(result => {
+    res.sendStatus(201);
+  })
+  .catch(error => {
+    console.log('Error in /api/category POST DB query', error);
+    res.sendStatus(500);
+  })
+})
+
 module.exports = router;

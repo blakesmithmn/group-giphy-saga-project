@@ -13,21 +13,21 @@ import './search.css';
 
 export default function Search(){
     const [search, setSearch] = useState('');
-
+    
     const dispatch = useDispatch();
 
     // Sends input string to saga function searchGif:
     const submitSearch = ()=> {
         dispatch({
             type: 'SAGA_SEARCH',
-            payload: search.query
+            payload: search
         })
         setSearch('');
     }
     // Import array of search results from redux reducer:
     const searchResults = useSelector(store=> store.searchResults)
-    console.log(search);
-    console.log(searchResults) 
+    // console.log(search);
+    // console.log(searchResults) 
     // [{}{}]
 
     return(
